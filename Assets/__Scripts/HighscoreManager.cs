@@ -76,11 +76,14 @@ public class HighscoreManager : MonoBehaviour
     }
 
     private void LoadHighscores()
+{
+    for (int i = 0; i < highscores.Length; i++)
     {
-        // Load highscores
-        for (int i = 0; i < highscores.Length; i++)
-        {
-            highscores[i] = PlayerPrefs.GetInt($"HighScore{i}", 0);
-        }
+        highscores[i] = PlayerPrefs.GetInt($"HighScore{i}", 0);
     }
+
+    // Print loaded highscores for debugging
+    Debug.Log("Loaded Highscores: " + string.Join(", ", highscores));
+}
+
 }
