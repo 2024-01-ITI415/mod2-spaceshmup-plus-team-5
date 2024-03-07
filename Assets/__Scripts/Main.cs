@@ -46,7 +46,7 @@ public class Main : MonoBehaviour
 
     public void UpdateHighscoreUI()
     {
-        highScoreText.text = "High Score: " + highScore;
+        highScoreText.text = "Highscore: " + highScore;
     }
 
     public void ShipDestroyed(Enemy e)
