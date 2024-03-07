@@ -132,10 +132,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 792527651}
-  - component: {fileID: 792527652}
   - component: {fileID: 792527653}
+  - component: {fileID: 792527654}
   m_Layer: 0
-  m_Name: HighscoreManager
+  m_Name: HighscoreDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -158,22 +158,6 @@ Transform:
   - {fileID: 1554934810}
   m_Father: {fileID: 1320353518}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &792527652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 792527650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 097f2d5997a631742a491ef9de44b1db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  highscores: 0000000000000000000000000000000000000000
-  highscoreText: {fileID: 1088294870}
-  postGameMenu: {fileID: 1320353514}
-  restartButton: {fileID: 1554934811}
 --- !u!114 &792527653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +170,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6288a839dba39459b890920f0b2319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  restartButton: {fileID: 1554934811}
+--- !u!114 &792527654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792527650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64534086e1d2a8f4d9ecff413180b269, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highscoreText: {fileID: 1088294870}
 --- !u!1 &931496461
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,7 +436,7 @@ GameObject:
   - component: {fileID: 1088294871}
   - component: {fileID: 1088294870}
   m_Layer: 5
-  m_Name: highscoreText
+  m_Name: highscoreDisplayText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -498,7 +494,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 'Highscores:'
 --- !u!222 &1088294871
 CanvasRenderer:
   m_ObjectHideFlags: 0
