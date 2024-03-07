@@ -9,6 +9,8 @@ public class HighscoreManager : MonoBehaviour
     public int[] highscores = new int[5]; // Top 5 highscores array.
     public Text highscoreText; 
     public GameObject postGameMenu;
+    public Button restartButton;  
+
 
     private void Awake()
     {
