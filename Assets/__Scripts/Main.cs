@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour {
@@ -20,11 +19,13 @@ public class Main : MonoBehaviour {
         WeaponType.blaster, WeaponType.blaster, WeaponType.spread, WeaponType.shield
     };
 
+    private BoundsCheck bndCheck;
+
     [Header("Score")]
     public int score = 0; // Player's score
-    public Text scoreText; 
+    public Text scoreText;
 
-     void Start()
+    void Start()
     {
         UpdateScoreUI();
     }
@@ -34,16 +35,12 @@ public class Main : MonoBehaviour {
         scoreText.text = "Score: " + score;
     }
 
-
-    private BoundsCheck bndCheck;
-
     public void ShipDestroyed( Enemy e)
     {
         score += e.score;
-
         UpdateScoreUI();
 
-        if (score > GetLowestHighscore())
+        if (score > HighscoreManager.instance.GetLowestHighscore())
         {
             HighscoreManager.instance.AddHighscore(score);
         }
@@ -66,26 +63,11 @@ public class Main : MonoBehaviour {
         }
     }
 
-    private int GetLowestHighscore()
-    {
-        HighscoreManager highscoreManager = HighscoreManager.instance;
-        if (highscoreManager != null && highscoreManager.highscores.Length > 0)
-        {
-
-            return highscoreManager.highscores[highscoreManager.highscores.Length - 1];
-        }
-        return 0;
-    }
-
     private void Awake()
     {
         S = this;
         // Set bndCheck to reference the BoundsCheck component on this GameObject
         bndCheck = GetComponent<BoundsCheck>();
-
-        // Initialize score and update UI
-        score = 0;
-        UpdateScoreUI();
 
         // Invoke SpawnEnemy() once (in 2 seconds, based on default values)
         Invoke("SpawnEnemy", 1f / enemySpawnPerSecond);

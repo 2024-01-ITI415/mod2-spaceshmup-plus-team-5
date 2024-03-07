@@ -1,17 +1,9 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class ResetButton : MonoBehaviour
 {
-    public Button restartButton;
-
-    private void Start()
-    {
-        restartButton.onClick.AddListener(OnrestartButtonClick);
-    }
-
-    private void OnrestartButtonClick()
+    public void PlayAgain()
     {
         SceneManager.LoadScene("_Scene_0");
     }

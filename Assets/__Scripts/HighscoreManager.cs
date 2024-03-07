@@ -6,11 +6,8 @@ public class HighscoreManager : MonoBehaviour
 {
     public static HighscoreManager instance;
 
-    public int[] highscores = new int[5]; // Top 5 highscores array.
-    public Text highscoreText; 
-    public GameObject postGameMenu;
-    public Button restartButton;  
-
+    public int[] highscores = new int[5]; // Top 5 highscores
+    public Text highscoreText;
 
     private void Awake()
     {
@@ -18,6 +15,7 @@ public class HighscoreManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            LoadHighscores();
         }
         else
         {
@@ -27,7 +25,7 @@ public class HighscoreManager : MonoBehaviour
 
     private void Start()
     {
-        // Default list is scores of zero
+        // Create empty highscore slots of zeroes
         for (int i = 0; i < highscores.Length; i++)
         {
             highscores[i] = 0;
@@ -38,12 +36,10 @@ public class HighscoreManager : MonoBehaviour
 
     public void AddHighscore(int score)
     {
-        // Update the highscores array
         for (int i = 0; i < highscores.Length; i++)
         {
             if (score > highscores[i])
             {
-                // Insert the new score at the appropriate position
                 for (int j = highscores.Length - 1; j > i; j--)
                 {
                     highscores[j] = highscores[j - 1];
@@ -54,7 +50,16 @@ public class HighscoreManager : MonoBehaviour
         }
 
         UpdateHighscoreUI();
-        Invoke("ShowPostGameMenuWithDelay", 2.0f);
+        SaveHighscores();
+    }
+
+    public int GetLowestHighscore()
+    {
+        if (highscores.Length > 0)
+        {
+            return highscores[highscores.Length - 1];
+        }
+        return 0;
     }
 
     private void UpdateHighscoreUI()
@@ -64,11 +69,16 @@ public class HighscoreManager : MonoBehaviour
         {
             displayText += $"{i + 1}. {highscores[i]}\n";
         }
-         highscoreText.text = displayText;
+        highscoreText.text = displayText;
     }
 
-    public void ShowPostGameMenuWithDelay()
+    private void SaveHighscores()
     {
-        SceneManager.LoadScene("PostGameMenuScene");
+        // Save highscores
+    }
+
+    private void LoadHighscores()
+    {
+        // Load highscores
     }
 }
