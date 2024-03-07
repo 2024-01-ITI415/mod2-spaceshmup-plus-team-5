@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour {
@@ -18,6 +19,21 @@ public class Main : MonoBehaviour {
     {
         WeaponType.blaster, WeaponType.blaster, WeaponType.spread, WeaponType.shield
     };
+
+    [Header("Score")]
+    public int score = 0; // Player's score
+    public Text scoreText; 
+
+     void Start()
+    {
+        UpdateScoreUI();
+    }
+
+    public void UpdateScoreUI()
+    {
+        scoreText.text = "Score: " + score;
+    }
+
 
     private BoundsCheck bndCheck;
 
@@ -46,6 +62,10 @@ public class Main : MonoBehaviour {
         S = this;
         // Set bndCheck to reference the BoundsCheck component on this GameObject
         bndCheck = GetComponent<BoundsCheck>();
+
+        // Initialize score and update UI
+        score = 0;
+        UpdateScoreUI();
 
         // Invoke SpawnEnemy() once (in 2 seconds, based on default values)
         Invoke("SpawnEnemy", 1f / enemySpawnPerSecond);
