@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class Hero : MonoBehaviour {
@@ -86,8 +87,10 @@ public class Hero : MonoBehaviour {
         {
             shieldLevel--;
             Destroy(go);
-
-            Main.S.score += Main.S.enemyScore;
+            
+            // Increment the score directly here
+            Main.S.score += 100;
+            Main.S.UpdateScoreUI(); // Update the score UI
         }
         else if (go.tag == "PowerUp")
         {
@@ -142,9 +145,10 @@ public class Hero : MonoBehaviour {
             // If the shield is going to be set to less than zero
             if (value < 0)
             {
-                Destroy(this.gameObject);
-                // Tell Main.S to restart the game after a delay
-                Main.S.DelayedRestart(gameRestartDelay);
+                // Switch to the PostGameMenuScene
+                SceneManager.LoadScene("PostGameMenuScene");
+                // Optionally, you can pass the score to the next scene if needed
+                PlayerPrefs.SetInt("PlayerScore", Main.S.score);
             }
         }
     }
