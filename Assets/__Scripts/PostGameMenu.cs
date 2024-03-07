@@ -23,6 +23,9 @@ public class PostGameMenu : MonoBehaviour
             displayText += $"{i + 1}. {score}\n";
         }
 
+        // Print retrieved highscores for debugging
+        Debug.Log("Retrieved Highscores: " + displayText);
+
         highscoreText.text = displayText;
     }
 }

@@ -38,6 +38,10 @@ public class HighscoreManager : MonoBehaviour
                     highscores[j] = highscores[j - 1];
                 }
                 highscores[i] = score;
+
+                // Print highscores for debugging
+                Debug.Log("Updated Highscores: " + string.Join(", ", highscores));
+            
                 break;
             }
         }
@@ -68,6 +72,7 @@ public class HighscoreManager : MonoBehaviour
         {
             PlayerPrefs.SetInt($"HighScore{i}", highscores[i]);
         }
+        PlayerPrefs.Save(); // Save changes
     }
 
     private void LoadHighscores()
