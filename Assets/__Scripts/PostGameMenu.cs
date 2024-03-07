@@ -12,11 +12,13 @@ public class PostGameMenu : MonoBehaviour
         // ... Repeat for HighScore2, HighScore3, HighScore4
 
         Invoke("UpdateHighscoreUI", 0.1f);
+
     }
 
     void UpdateHighscoreUI()
     {
         string displayText = "Highscores:\n";
+
         for (int i = 0; i < 5; i++)
         {
             int score = PlayerPrefs.GetInt($"HighScore{i}", 0);
@@ -27,5 +29,6 @@ public class PostGameMenu : MonoBehaviour
         Debug.Log("Retrieved Highscores: " + displayText);
 
         highscoreText.text = displayText;
+
     }
 }

@@ -20,6 +20,24 @@ public class HighscoreManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        // Initialize highscores on startup
+        for (int i = 0; i < highscores.Length; i++)
+        {
+            // Use unique keys for each highscore entry
+            string key = $"HighScore{i}";
+            if (PlayerPrefs.HasKey(key))
+            {
+                highscores[i] = PlayerPrefs.GetInt(key);
+            }
+            else
+            {
+                highscores[i] = 0;
+                PlayerPrefs.SetInt(key, 0);
+            }
+        }
+
+        UpdateHighscoreUI();
     }
 
     private void Start()
@@ -70,7 +88,8 @@ public class HighscoreManager : MonoBehaviour
         // Save highscores
         for (int i = 0; i < highscores.Length; i++)
         {
-            PlayerPrefs.SetInt($"HighScore{i}", highscores[i]);
+            string key = $"HighScore{i}";
+            PlayerPrefs.SetInt(key, highscores[i]);
         }
         PlayerPrefs.Save(); // Save changes
     }
