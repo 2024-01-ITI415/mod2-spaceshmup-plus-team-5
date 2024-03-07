@@ -3,14 +3,18 @@ using UnityEngine.UI;
 
 public class PostGameMenu : MonoBehaviour
 {
-    public Text highscoreListText;
+    public Text highscoreText;
 
     void Start()
     {
-        UpdateHighscoreListUI();
+        Debug.Log($"HighScore0: {PlayerPrefs.GetInt("HighScore0", 0)}");
+        Debug.Log($"HighScore1: {PlayerPrefs.GetInt("HighScore1", 0)}");
+        // ... Repeat for HighScore2, HighScore3, HighScore4
+
+        Invoke("UpdateHighscoreUI", 0.1f);
     }
 
-    void UpdateHighscoreListUI()
+    void UpdateHighscoreUI()
     {
         string displayText = "Highscores:\n";
         for (int i = 0; i < 5; i++)
@@ -19,6 +23,6 @@ public class PostGameMenu : MonoBehaviour
             displayText += $"{i + 1}. {score}\n";
         }
 
-        highscoreListText.text = displayText;
+        highscoreText.text = displayText;
     }
 }
