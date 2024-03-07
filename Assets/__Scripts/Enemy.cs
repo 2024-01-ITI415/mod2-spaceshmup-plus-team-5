@@ -96,8 +96,6 @@ public class Enemy : MonoBehaviour {
                     }
                     notifiedOfDestruction = true;
 
-                    // Update the player's score based on the enemy's score value
-                    Main.S.score += score;
 
                     // Destroy this enemy
                     Destroy(this.gameObject);

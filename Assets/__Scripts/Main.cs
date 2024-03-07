@@ -39,6 +39,10 @@ public class Main : MonoBehaviour {
 
     public void ShipDestroyed( Enemy e)
     {
+        score += e.score;
+
+        UpdateScoreUI();
+
         // Potentially generate a PowerUp
         if (Random.value <= e.powerUpDropChance)
         {
