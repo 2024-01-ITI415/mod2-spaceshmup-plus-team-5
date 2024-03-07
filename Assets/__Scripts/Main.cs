@@ -43,6 +43,11 @@ public class Main : MonoBehaviour {
 
         UpdateScoreUI();
 
+        if (score > GetLowestHighscore())
+        {
+            HighscoreManager.instance.AddHighscore(score);
+        }
+
         // Potentially generate a PowerUp
         if (Random.value <= e.powerUpDropChance)
         {
@@ -59,6 +64,17 @@ public class Main : MonoBehaviour {
             // Set it to the position of the destroyed ship
             pu.transform.position = e.transform.position;
         }
+    }
+
+    private int GetLowestHighscore()
+    {
+        HighscoreManager highscoreManager = HighscoreManager.instance;
+        if (highscoreManager != null && highscoreManager.highscores.Length > 0)
+        {
+
+            return highscoreManager.highscores[highscoreManager.highscores.Length - 1];
+        }
+        return 0;
     }
 
     private void Awake()

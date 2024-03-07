@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HighscoreManager : MonoBehaviour
 {
     public static HighscoreManager instance;
 
-    private int[] highscores = new int[5]; // Top 5 highscores array.
+    public int[] highscores = new int[5]; // Top 5 highscores array.
     public Text highscoreText; 
+    public GameObject postGameMenu;
 
     private void Awake()
     {
@@ -50,6 +52,7 @@ public class HighscoreManager : MonoBehaviour
         }
 
         UpdateHighscoreUI();
+        Invoke("ShowPostGameMenuWithDelay", 2.0f);
     }
 
     private void UpdateHighscoreUI()
@@ -60,5 +63,10 @@ public class HighscoreManager : MonoBehaviour
             displayText += $"{i + 1}. {highscores[i]}\n";
         }
          highscoreText.text = displayText;
+    }
+
+    public void ShowPostGameMenuWithDelay()
+    {
+        SceneManager.LoadScene("PostGameMenuScene");
     }
 }
