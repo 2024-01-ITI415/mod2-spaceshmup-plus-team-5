@@ -409,8 +409,11 @@ MonoBehaviour:
   prefabPowerUp: {fileID: 1062273549804748, guid: 9649a9a79085a854d9990613a980f435,
     type: 3}
   powerUpFrequency: 01000000010000000200000006000000
-  score: 100
+  score: 0
   scoreText: {fileID: 1867907406}
+  enemyScore: 100
+  highScoreText: {fileID: 1823513287}
+  highScore: 0
 --- !u!20 &282840813
 Camera:
   m_ObjectHideFlags: 0
@@ -1125,7 +1128,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highscores: 0000000000000000000000000000000000000000
   highscoreText: {fileID: 1823513287}
-  postGameMenu: {fileID: 1545567870}
 --- !u!1001 &995000017
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1708,7 +1710,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 'Highscore: '
 --- !u!222 &1823513288
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1787,7 +1789,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 'Score: '
 --- !u!222 &1867907407
 CanvasRenderer:
   m_ObjectHideFlags: 0

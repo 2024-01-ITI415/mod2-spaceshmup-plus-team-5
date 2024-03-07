@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class HighscoreManager : MonoBehaviour
 {
@@ -25,12 +24,6 @@ public class HighscoreManager : MonoBehaviour
 
     private void Start()
     {
-        // Create empty highscore slots of zeroes
-        for (int i = 0; i < highscores.Length; i++)
-        {
-            highscores[i] = 0;
-        }
-
         UpdateHighscoreUI();
     }
 
@@ -64,21 +57,25 @@ public class HighscoreManager : MonoBehaviour
 
     private void UpdateHighscoreUI()
     {
-        string displayText = "Highscores:\n";
-        for (int i = 0; i < highscores.Length; i++)
-        {
-            displayText += $"{i + 1}. {highscores[i]}\n";
-        }
+        string displayText = "HighScore: " + PlayerPrefs.GetInt("HighScore");
         highscoreText.text = displayText;
     }
 
     private void SaveHighscores()
     {
         // Save highscores
+        for (int i = 0; i < highscores.Length; i++)
+        {
+            PlayerPrefs.SetInt($"HighScore{i}", highscores[i]);
+        }
     }
 
     private void LoadHighscores()
     {
         // Load highscores
+        for (int i = 0; i < highscores.Length; i++)
+        {
+            highscores[i] = PlayerPrefs.GetInt($"HighScore{i}", 0);
+        }
     }
 }

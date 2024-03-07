@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Main : MonoBehaviour {
-
+public class Main : MonoBehaviour
+{
     static public Main S; // A singleton for Main
     static Dictionary<WeaponType, WeaponDefinition> WEAP_DICT;
 
@@ -26,9 +26,17 @@ public class Main : MonoBehaviour {
     public int score = 0; // Player's score
     public Text scoreText;
 
+    [HideInInspector] public int enemyScore = 100; // Points earned for destroying an enemy
+
+    [Header("High Score")]
+    public Text highScoreText;
+    public int highScore;
+
     void Start()
     {
+        LoadHighScore();
         UpdateScoreUI();
+        UpdateHighscoreUI();
     }
 
     public void UpdateScoreUI()
@@ -36,14 +44,21 @@ public class Main : MonoBehaviour {
         scoreText.text = "Score: " + score;
     }
 
-    public void ShipDestroyed( Enemy e)
+    public void UpdateHighscoreUI()
+    {
+        highScoreText.text = "High Score: " + highScore;
+    }
+
+    public void ShipDestroyed(Enemy e)
     {
         score += e.score;
         UpdateScoreUI();
 
-        if (score > HighscoreManager.instance.GetLowestHighscore())
+        if (score > highScore)
         {
-            HighscoreManager.instance.AddHighscore(score);
+            highScore = score;
+            SaveHighScore();
+            UpdateHighscoreUI();
         }
 
         // Potentially generate a PowerUp
@@ -75,9 +90,23 @@ public class Main : MonoBehaviour {
 
         // A generic Dictionary with WeaponType as the key
         WEAP_DICT = new Dictionary<WeaponType, WeaponDefinition>();
-        foreach(WeaponDefinition def in weaponDefinitions)
+        foreach (WeaponDefinition def in weaponDefinitions)
         {
             WEAP_DICT[def.type] = def;
+        }
+    }
+
+    public void SaveHighScore()
+    {
+        PlayerPrefs.SetInt("HighScore", highScore);
+        PlayerPrefs.Save();
+    }
+
+    public void LoadHighScore()
+    {
+        if (PlayerPrefs.HasKey("HighScore"))
+        {
+            highScore = PlayerPrefs.GetInt("HighScore");
         }
     }
 
