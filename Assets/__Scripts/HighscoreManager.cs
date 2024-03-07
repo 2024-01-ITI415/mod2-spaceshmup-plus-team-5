@@ -57,7 +57,7 @@ public class HighscoreManager : MonoBehaviour
 
     private void UpdateHighscoreUI()
     {
-        string displayText = "HighScore: " + PlayerPrefs.GetInt("HighScore");
+        string displayText = "Highscore: " + PlayerPrefs.GetInt("HighScore");
         highscoreText.text = displayText;
     }
 

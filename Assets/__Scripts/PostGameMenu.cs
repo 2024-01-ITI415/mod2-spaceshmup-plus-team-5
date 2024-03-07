@@ -1,16 +1,16 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HighscoreDisplay : MonoBehaviour
+public class PostGameMenu : MonoBehaviour
 {
-    public Text highscoreText;
+    public Text highscoreListText;
 
     void Start()
     {
-        UpdateHighscoreUI();
+        UpdateHighscoreListUI();
     }
 
-    void UpdateHighscoreUI()
+    void UpdateHighscoreListUI()
     {
         string displayText = "Highscores:\n";
         for (int i = 0; i < 5; i++)
@@ -19,6 +19,6 @@ public class HighscoreDisplay : MonoBehaviour
             displayText += $"{i + 1}. {score}\n";
         }
 
-        highscoreText.text = displayText;
+        highscoreListText.text = displayText;
     }
 }
