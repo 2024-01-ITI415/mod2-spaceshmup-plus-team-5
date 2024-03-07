@@ -12,6 +12,8 @@ public class Part
     public string name; // The name of this part
     public float health; // The amount of health this part has
     public string[] protectedBy; // The other parts that protect this
+    public GameObject projectileprefab;
+    public float projectilespeed = 40;
 
     // These two fields are set automatically in Start().
     // Caching like this makes it faster and easier to find these later
