@@ -632,6 +632,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114684557380802588, guid: d38b8bdef6bb4724e9a7341bda0aad27,
         type: 3}
+      propertyPath: def.projectilePrefab
+      value: 
+      objectReference: {fileID: 1899541879965282, guid: 61bdac66902f9b342b188f2493420e33,
+        type: 3}
+    - target: {fileID: 114684557380802588, guid: d38b8bdef6bb4724e9a7341bda0aad27,
+        type: 3}
       propertyPath: def.projectileColor.b
       value: 0
       objectReference: {fileID: 0}
