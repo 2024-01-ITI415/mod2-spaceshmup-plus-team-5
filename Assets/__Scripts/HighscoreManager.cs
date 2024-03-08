@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-/*
+
 public class HighscoreManager : MonoBehaviour
 {
     public static HighscoreManager instance;
@@ -116,97 +116,4 @@ public class HighscoreManager : MonoBehaviour
         Debug.Log("Loaded Highscores: " + string.Join(", ", highscores));
     }
 
-}*/
-
-
-
-
-
-
-public class HighscoreManager : MonoBehaviour
-{
-    public static HighscoreManager instance;
-
-    public int[] highscores = new int[5]; // Top 5 highscores
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-            LoadHighscores();
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    public void Start()
-    {
-        // Create empty highscore slots of zeroes
-        for (int i = 0; i < highscores.Length; i++)
-        {
-            highscores[i] = 0;
-        }
-
-        UpdateHighscoreUI();
-        SaveHighscores();
-    }
-
-    public void AddHighscore(int score)
-    {
-        for (int i = 0; i < highscores.Length; i++)
-        {
-            if (score > highscores[i])
-            {
-                for (int j = highscores.Length - 1; j > i; j--)
-                {
-                    highscores[j] = highscores[j - 1];
-                }
-                highscores[i] = score;
-                break;
-            }
-        }
-
-        UpdateHighscoreUI();
-        SaveHighscores();
-    }
-
-    public int[] GetTopHighscores()
-    {
-        return highscores;
-    }
-
-    private void UpdateHighscoreUI()
-    {
-        // Optionally, you can add a check to see if PostGameMenu.cs is present
-        PostGameMenu postGameMenu = FindObjectOfType<PostGameMenu>();
-        if (postGameMenu != null)
-        {
-            postGameMenu.UpdateHighscoreUI();
-        }
-    }
-
-    private void SaveHighscores()
-{
-    // Save highscores
-    PlayerPrefs.SetInt("HighScore0", highscores[0]);
-    PlayerPrefs.SetInt("HighScore1", highscores[1]);
-    PlayerPrefs.SetInt("HighScore2", highscores[2]);
-    PlayerPrefs.SetInt("HighScore3", highscores[3]);
-    PlayerPrefs.SetInt("HighScore4", highscores[4]);
-
-    Debug.Log("Highscores saved:");
-    for (int i = 0; i < highscores.Length; i++)
-    {
-        Debug.Log($"HighScore{i}: {highscores[i]}");
-    }
-}
-
-    private void LoadHighscores()
-    {
-        // Load highscores
-    }
 }
