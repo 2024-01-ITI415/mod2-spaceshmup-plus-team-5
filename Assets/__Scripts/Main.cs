@@ -42,6 +42,10 @@ public class Main : MonoBehaviour
     public void UpdateScoreUI()
     {
         scoreText.text = "Score: " + score;
+
+        // Display current score and highscore in the console
+        Debug.Log($"Current Score: {score}, Current Highscore: {highScore}");
+
     }
 
     public void UpdateHighscoreUI()

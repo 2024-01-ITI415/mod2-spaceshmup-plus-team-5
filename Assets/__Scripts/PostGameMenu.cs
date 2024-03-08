@@ -11,17 +11,27 @@ public class PostGameMenu : MonoBehaviour
         Debug.Log($"HighScore1: {PlayerPrefs.GetInt("HighScore1", 0)}");
         // ... Repeat for HighScore2, HighScore3, HighScore4
 
-        Invoke("UpdateHighscoreUI", 0.1f);
+        // Load highscores from HighscoreManager
+        HighscoreManager.instance.LoadHighscores();
+
+        // Retrieve the current highscore from PlayerPrefs
+        int currentHighscore = PlayerPrefs.GetInt("CurrentHighscore", 0);
+
+        // Display the current highscore or use it as needed
+        Debug.Log($"Current Highscore: {currentHighscore}");
+
+        // Update the UI with highscores
+        UpdateHighscoreUI();
 
     }
 
     void UpdateHighscoreUI()
     {
-        string displayText = "Highscores:\n";
+        string displayText = "Highscores:\n" + Main.highScore;
 
         for (int i = 0; i < 5; i++)
         {
-            int score = PlayerPrefs.GetInt($"HighScore{i}", 0);
+            int score = HighscoreManager.instance.highscores[i];
             displayText += $"{i + 1}. {score}\n";
         }
 

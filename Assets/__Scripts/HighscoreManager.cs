@@ -7,6 +7,22 @@ public class HighscoreManager : MonoBehaviour
 
     public int[] highscores = new int[5]; // Top 5 highscores
     public Text highscoreText;
+    private void Start()
+{
+    // Load highscores first
+    LoadHighscores();
+
+    // Create empty highscore slots of zeroes if needed
+    for (int i = 0; i < highscores.Length; i++)
+    {
+        if (highscores[i] == 0)
+        {
+            highscores[i] = PlayerPrefs.GetInt($"HighScore{i}", 0);
+        }
+    }
+
+    UpdateHighscoreUI();
+}
 
     private void Awake()
     {
@@ -37,11 +53,6 @@ public class HighscoreManager : MonoBehaviour
             }
         }
 
-        UpdateHighscoreUI();
-    }
-
-    private void Start()
-    {
         UpdateHighscoreUI();
     }
 
@@ -94,15 +105,15 @@ public class HighscoreManager : MonoBehaviour
         PlayerPrefs.Save(); // Save changes
     }
 
-    private void LoadHighscores()
-{
-    for (int i = 0; i < highscores.Length; i++)
+    public void LoadHighscores()
     {
-        highscores[i] = PlayerPrefs.GetInt($"HighScore{i}", 0);
-    }
+        for (int i = 0; i < highscores.Length; i++)
+        {
+            highscores[i] = PlayerPrefs.GetInt($"HighScore{i}", 0);
+        }
 
-    // Print loaded highscores for debugging
-    Debug.Log("Loaded Highscores: " + string.Join(", ", highscores));
-}
+        // Print loaded highscores for debugging
+        Debug.Log("Loaded Highscores: " + string.Join(", ", highscores));
+    }
 
 }
