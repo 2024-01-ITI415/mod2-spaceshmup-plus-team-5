@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 using UnityEngine.UI;
 
 public class PostGameMenu : MonoBehaviour
@@ -40,5 +40,35 @@ public class PostGameMenu : MonoBehaviour
 
         highscoreText.text = displayText;
 
+    }
+}*/
+
+
+using UnityEngine;
+using UnityEngine.UI;
+
+public class PostGameMenu : MonoBehaviour
+{
+    public Text highscoreText;
+
+    void Start()
+    {
+       HighscoreManager.instance.Start();
+        UpdateHighscoreUI();
+    }
+
+    public void UpdateHighscoreUI()
+    {
+        // Retrieve the top 5 highscores from HighscoreManager
+        int[] topHighscores = HighscoreManager.instance.GetTopHighscores();
+
+        string displayText = "Highscores:\n";
+        for (int i = 0; i < 5; i++)
+        {
+            int score = topHighscores[i];
+            displayText += $"{i + 1}. {score:000}\n"; // Format the score to display leading zeros
+        }
+
+        highscoreText.text = displayText;
     }
 }
