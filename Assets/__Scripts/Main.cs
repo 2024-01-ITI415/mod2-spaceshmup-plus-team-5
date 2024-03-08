@@ -58,6 +58,11 @@ public class Main : MonoBehaviour
         score += e.score;
         UpdateScoreUI();
 
+        if (score > HighscoreManager.instance.GetLowestHighscore())
+        {
+            HighscoreManager.instance.AddHighscore(score);
+        }
+
         if (score > highScore)
         {
             highScore = score;

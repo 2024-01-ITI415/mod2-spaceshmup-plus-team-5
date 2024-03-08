@@ -152,6 +152,7 @@ public class HighscoreManager : MonoBehaviour
         }
 
         UpdateHighscoreUI();
+        SaveHighscores();
     }
 
     public void AddHighscore(int score)
@@ -189,9 +190,20 @@ public class HighscoreManager : MonoBehaviour
     }
 
     private void SaveHighscores()
+{
+    // Save highscores
+    PlayerPrefs.SetInt("HighScore0", highscores[0]);
+    PlayerPrefs.SetInt("HighScore1", highscores[1]);
+    PlayerPrefs.SetInt("HighScore2", highscores[2]);
+    PlayerPrefs.SetInt("HighScore3", highscores[3]);
+    PlayerPrefs.SetInt("HighScore4", highscores[4]);
+
+    Debug.Log("Highscores saved:");
+    for (int i = 0; i < highscores.Length; i++)
     {
-        // Save highscores
+        Debug.Log($"HighScore{i}: {highscores[i]}");
     }
+}
 
     private void LoadHighscores()
     {
