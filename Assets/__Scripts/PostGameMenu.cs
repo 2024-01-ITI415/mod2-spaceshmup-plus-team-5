@@ -3,34 +3,51 @@ using UnityEngine.UI;
 
 public class PostGameMenu : MonoBehaviour
 {
-    public Text highscoreText;
+    public Text highscoreDisplayText;
+    string displayText = "";
 
-    void Start()
+    void OnEnable()
     {
-        // Load highscores from HighscoreManager
-        HighscoreManager.instance.LoadHighscores(); 
+        if (HighscoreManager.instance != null)
+        {
+            HighscoreManager.instance.LoadHighscores();
+        }
+        else
+        {
+            Debug.LogError("HighscoreManager.instance is NULL in PostGameMenu.OnEnable()");
+        }
 
         // Update the UI with highscores
         UpdateHighscoreUI();
     }
 
+
     void UpdateHighscoreUI()
     {
-        string displayText = "Highscores:\n";
+        Debug.Log("UpdateHighscoreUI is being called.");
 
-        for (int i = 0; i < 5; i++)
+        if (highscoreDisplayText != null)
         {
-            int score = HighscoreManager.instance.highscores[i];
-            displayText += $"{i + 1}. {score}\n";
+
+            for (int i = 0; i < 5; i++)
+            {
+                int score = HighscoreManager.instance.highscores[i];
+                displayText += $"{i + 1}. {score}\n";
+            }
+
+            // Print retrieved highscores for debugging
+            Debug.Log("Retrieved Highscores: " + displayText);
+
+            // Update the highscoreDisplayText directly
+            highscoreDisplayText.text = displayText;
+
+            // Check the updated text in the UI
+            string highscoreTextAsString = highscoreDisplayText.text;
+            Debug.Log(highscoreTextAsString);
         }
-
-        // Print retrieved highscores for debugging
-        Debug.Log("Retrieved Highscores: " + displayText);
-
-        //Update the highscoreDisplayText directly
-        highscoreText.text = displayText;
-        string highscoreTextAsString = highscoreText.text;
-        Debug.Log(highscoreTextAsString);
-
+        else
+        {
+            Debug.LogError("highscoreText is NULL in PostGameMenu.UpdateHighscoreUI()");
+        }
     }
 }

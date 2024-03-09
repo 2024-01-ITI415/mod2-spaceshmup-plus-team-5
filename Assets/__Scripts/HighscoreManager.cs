@@ -29,6 +29,9 @@ public class HighscoreManager : MonoBehaviour
             return;
         }
 
+        Debug.Log("HighscoreManager Awake: " + (instance != null ? "Instance set" : "Instance is NULL"));
+
+
         // Initialize highscores on startup
         for (int i = 0; i < highscores.Length; i++)
         {
