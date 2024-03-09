@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 792527651}
   - component: {fileID: 792527655}
   - component: {fileID: 792527656}
-  - component: {fileID: 792527657}
   m_Layer: 0
   m_Name: HighscoreDisplay
   m_TagString: Untagged
@@ -183,18 +182,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highscoreText: {fileID: 1088294870}
---- !u!114 &792527657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 792527650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e6288a839dba39459b890920f0b2319, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &931496461
 GameObject:
   m_ObjectHideFlags: 0

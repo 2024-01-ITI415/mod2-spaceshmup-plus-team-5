@@ -8,7 +8,7 @@ public class PostGameMenu : MonoBehaviour
     void Start()
     {
         // Load highscores from HighscoreManager
-        HighscoreManager.instance.LoadHighscores();
+        HighscoreManager.instance.LoadHighscores(); 
 
         // Update the UI with highscores
         UpdateHighscoreUI();
@@ -27,6 +27,10 @@ public class PostGameMenu : MonoBehaviour
         // Print retrieved highscores for debugging
         Debug.Log("Retrieved Highscores: " + displayText);
 
+        //Update the highscoreDisplayText directly
         highscoreText.text = displayText;
+        string highscoreTextAsString = highscoreText.text;
+        Debug.Log(highscoreTextAsString);
+
     }
 }
