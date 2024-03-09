@@ -115,4 +115,9 @@ public class Main : MonoBehaviour {
         // which means it has failed to find the right WeaponDefinition
         return new WeaponDefinition();
     }
+
+    internal void ShipDestroyed(Asteroid asteroid)
+    {
+        throw new System.NotImplementedException();
+    }
 }
