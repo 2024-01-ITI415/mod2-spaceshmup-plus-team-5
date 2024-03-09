@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7569b91116e196b4aba769414bea9f3f, type: 2}
+  - {fileID: 2100000, guid: bbb9acde0da61a34db17dd008d6988b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -246,11 +246,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3213735346501722827}
   - {fileID: 4796706196382564}
   - {fileID: 4573930061731222}
   - {fileID: 4771969574220610}
   - {fileID: 4421315948988522}
-  - {fileID: 3213735346501722827}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &54435827720025918
@@ -293,7 +293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  fireRate: 0.3
+  fireRate: 0.5
   health: 10
   score: 100
   showDamageDuration: 0.1
@@ -413,7 +413,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7569b91116e196b4aba769414bea9f3f, type: 2}
+  - {fileID: 2100000, guid: bbb9acde0da61a34db17dd008d6988b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -576,12 +576,16 @@ PrefabInstance:
       value: Weapon
       objectReference: {fileID: 0}
     - target: {fileID: 4052337362685714, guid: d38b8bdef6bb4724e9a7341bda0aad27, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4052337362685714, guid: d38b8bdef6bb4724e9a7341bda0aad27, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.125
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4052337362685714, guid: d38b8bdef6bb4724e9a7341bda0aad27, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.18
+      value: -1.11
       objectReference: {fileID: 0}
     - target: {fileID: 4052337362685714, guid: d38b8bdef6bb4724e9a7341bda0aad27, type: 3}
       propertyPath: m_LocalPosition.z

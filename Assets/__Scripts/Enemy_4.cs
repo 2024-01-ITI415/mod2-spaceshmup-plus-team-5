@@ -28,6 +28,9 @@ public class Enemy_4 : Enemy {
     public Part[] parts; // The array of ship Parts
     public GameObject projectileprefab;
     public float projectilespeed = 40;
+    public delegate void ProjectileFireDelegate();
+    public ProjectileFireDelegate projectileFireDelegate;
+
 
     private Vector3 p0, p1; // The two points to interpolate
     private float timeStart; // Birth time for this Enemy_4
@@ -37,6 +40,7 @@ public class Enemy_4 : Enemy {
     {
         // There is already an initial position chosen by Main.SpawnEnemy()
         // so add it to points as the initial p0 & p1
+        StartCoroutine(FireProjectiles());
         p0 = p1 = pos;
 
         InitMovement();
@@ -50,6 +54,31 @@ public class Enemy_4 : Enemy {
             {
                 prt.go = t.gameObject;
                 prt.mat = prt.go.GetComponent<Renderer>().material;
+            }
+        }
+    }
+    IEnumerator FireProjectiles()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f); // Adjust this delay as needed
+            Fire(); // Fire projectiles
+        }
+    }
+    void Fire()
+    {
+        // Check if the projectilePrefab is assigned
+        if (projectileprefab != null)
+        {
+            // Instantiate a projectile
+            GameObject projGO = Instantiate(projectileprefab);
+            projGO.transform.position = transform.position;
+            projGO.transform.rotation = Quaternion.identity;
+            // Set the projectile's speed
+            Rigidbody rigidB = projGO.GetComponent<Rigidbody>();
+            if (rigidB != null)
+            {
+                rigidB.velocity = Vector3.down * projectilespeed;
             }
         }
     }
