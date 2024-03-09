@@ -34,4 +34,19 @@ public class Shield : MonoBehaviour {
         float rZ = -(rotationsPerSecond * Time.time * 360) % 360f;
         transform.rotation = Quaternion.Euler(0, 0, rZ);
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        // Check if the colliding object is a projectile
+        Projectile_Enemy projectile = other.GetComponent<Projectile_Enemy>();
+        if (projectile != null)
+        {
+            // Destroy the projectile
+            Destroy(projectile.gameObject);
+
+            // Read the current shield level from the Hero Singleton
+            int currLevel = Mathf.FloorToInt(Hero.S.shieldLevel);
+            // Reduce shield level by 1
+            Hero.S.shieldLevel--;
+        }
+    }
 }

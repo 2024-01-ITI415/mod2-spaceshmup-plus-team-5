@@ -31,6 +31,16 @@ public class Projectile_Enemy : MonoBehaviour
         rend = GetComponent<Renderer>();
         rigid = GetComponent<Rigidbody>();
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        // Check if the collision is with an object tagged as "Player" or "Obstacle"
+        if (collision.gameObject.CompareTag("Hero") || collision.gameObject.CompareTag("Enemy"))
+        {
+            // Destroy the projectile upon collision
+            Destroy(gameObject);
+        }
+       
+    }
 
     private void Update()
     {
