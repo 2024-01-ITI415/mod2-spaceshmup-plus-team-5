@@ -2,18 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hero : MonoBehaviour {
+public class Hero : MonoBehaviour
+{
     static public Hero S; // Singleton
 
     [Header("Set in Inspector")]
     // These fields control the movement of the ship
-    public float speed = 30;
+    public float speed = 30; 
     public float rollMult = -45;
     public float pitchMult = 30;
     public float gameRestartDelay = 2f;
     public GameObject projectilePrefab;
     public float projectileSpeed = 40;
     public Weapon[] weapons;
+
+    //dash variable
+
+    public float dashSpeedMultiplier = 4f;
+    public float dashDuration = 0.2f;
 
     [Header("Set Dynamically")]
     [SerializeField]
@@ -27,7 +33,11 @@ public class Hero : MonoBehaviour {
     // Create a WeaponFireDelegate field named fireDelegate.
     public WeaponFireDelegate fireDelegate;
 
-	void Start()
+    //variable to check if dash is happening
+
+    public bool isDashing = false;
+
+    void Start()
     {
         if (S == null)
         {
@@ -43,9 +53,9 @@ public class Hero : MonoBehaviour {
         ClearWeapons();
         weapons[0].SetType(WeaponType.blaster);
     }
-	
-	// Update is called once per frame
-	void Update()
+
+    // Update is called once per frame
+    void Update()
     {
         // Pull in information from the Input class
         float xAxis = Input.GetAxis("Horizontal");
@@ -53,8 +63,20 @@ public class Hero : MonoBehaviour {
 
         // Change transform.position based on the axes
         Vector3 pos = transform.position;
-        pos.x += xAxis * speed * Time.deltaTime;
-        pos.y += yAxis * speed * Time.deltaTime;
+
+        //if else to check if dash is happening and apply movement
+        if (!isDashing)
+        {
+            pos.x += xAxis * speed * Time.deltaTime;
+            pos.y += yAxis * speed * Time.deltaTime;
+        }
+        else
+        {
+            
+            pos.x += xAxis * speed * dashSpeedMultiplier * Time.deltaTime;
+            pos.y += yAxis * speed * dashSpeedMultiplier * Time.deltaTime;
+        }
+
         transform.position = pos;
 
         // Rotate the ship to make it feel more dynamic
@@ -67,6 +89,21 @@ public class Hero : MonoBehaviour {
         {
             fireDelegate();
         }
+
+        // Handle dash input
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            StartCoroutine(Dash());
+        }
+    }
+
+
+    //dash cool down function
+    public IEnumerator Dash()
+    {
+        isDashing = true;
+        yield return new WaitForSeconds(dashDuration);
+        isDashing = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -82,7 +119,7 @@ public class Hero : MonoBehaviour {
         }
         lastTriggerGo = go;
 
-        if(go.tag == "Enemy")
+        if (go.tag == "Enemy")
         {
             shieldLevel--;
             Destroy(go);
@@ -108,10 +145,10 @@ public class Hero : MonoBehaviour {
                 break;
 
             default:
-                if(pu.type == weapons[0].type)
+                if (pu.type == weapons[0].type)
                 {
                     Weapon w = GetEmptyWeaponSlot();
-                    if(w != null)
+                    if (w != null)
                     {
                         // Set it to pu.type
                         w.SetType(pu.type);
@@ -149,7 +186,7 @@ public class Hero : MonoBehaviour {
 
     Weapon GetEmptyWeaponSlot()
     {
-        for (int i=0; i<weapons.Length; i++)
+        for (int i = 0; i < weapons.Length; i++)
         {
             if (weapons[i].type == WeaponType.none)
             {
