@@ -34,7 +34,6 @@ public class Main : MonoBehaviour
 
     void Start()
     {
-        LoadHighScore();
         UpdateScoreUI();
         UpdateHighscoreUI();
     }
@@ -44,13 +43,12 @@ public class Main : MonoBehaviour
         scoreText.text = "Score: " + score;
 
         // Display current score and highscore in the console
-        Debug.Log($"Current Score: {score}, Current Highscore: {highScore}");
-
+        Debug.Log($"Current Score: {score}, Current Highscore: {HighscoreManager.instance.highscores[0]}");
     }
 
     public void UpdateHighscoreUI()
     {
-        highScoreText.text = "Highscore: " + highScore;
+        highScoreText.text = "Highscore: " + HighscoreManager.instance.highscores[0];
     }
 
     public void ShipDestroyed(Enemy e)
@@ -66,7 +64,6 @@ public class Main : MonoBehaviour
         if (score > highScore)
         {
             highScore = score;
-            SaveHighScore();
             UpdateHighscoreUI();
         }
 
@@ -102,20 +99,6 @@ public class Main : MonoBehaviour
         foreach (WeaponDefinition def in weaponDefinitions)
         {
             WEAP_DICT[def.type] = def;
-        }
-    }
-
-    public void SaveHighScore()
-    {
-        PlayerPrefs.SetInt("HighScore", highScore);
-        PlayerPrefs.Save();
-    }
-
-    public void LoadHighScore()
-    {
-        if (PlayerPrefs.HasKey("HighScore"))
-        {
-            highScore = PlayerPrefs.GetInt("HighScore");
         }
     }
 

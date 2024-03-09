@@ -7,22 +7,14 @@ public class HighscoreManager : MonoBehaviour
 
     public int[] highscores = new int[5]; // Top 5 highscores
     public Text highscoreText;
+
     private void Start()
-{
-    // Load highscores first
-    LoadHighscores();
-
-    // Create empty highscore slots of zeroes if needed
-    for (int i = 0; i < highscores.Length; i++)
     {
-        if (highscores[i] == 0)
-        {
-            highscores[i] = PlayerPrefs.GetInt($"HighScore{i}", 0);
-        }
-    }
+        // Load highscores first
+        LoadHighscores();
 
-    UpdateHighscoreUI();
-}
+        UpdateHighscoreUI();
+    }
 
     private void Awake()
     {
@@ -30,27 +22,17 @@ public class HighscoreManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-            LoadHighscores();
         }
         else
         {
             Destroy(gameObject);
+            return;
         }
 
         // Initialize highscores on startup
         for (int i = 0; i < highscores.Length; i++)
         {
-            // Use unique keys for each highscore entry
-            string key = $"HighScore{i}";
-            if (PlayerPrefs.HasKey(key))
-            {
-                highscores[i] = PlayerPrefs.GetInt(key);
-            }
-            else
-            {
-                highscores[i] = 0;
-                PlayerPrefs.SetInt(key, 0);
-            }
+            highscores[i] = PlayerPrefs.GetInt($"HighScore{i}", 0);
         }
 
         UpdateHighscoreUI();
@@ -70,7 +52,7 @@ public class HighscoreManager : MonoBehaviour
 
                 // Print highscores for debugging
                 Debug.Log("Updated Highscores: " + string.Join(", ", highscores));
-            
+
                 break;
             }
         }
@@ -90,7 +72,7 @@ public class HighscoreManager : MonoBehaviour
 
     private void UpdateHighscoreUI()
     {
-        string displayText = "Highscore: " + PlayerPrefs.GetInt("HighScore");
+        string displayText = "Highscore: " + highscores[0];
         highscoreText.text = displayText;
     }
 
@@ -99,8 +81,7 @@ public class HighscoreManager : MonoBehaviour
         // Save highscores
         for (int i = 0; i < highscores.Length; i++)
         {
-            string key = $"HighScore{i}";
-            PlayerPrefs.SetInt(key, highscores[i]);
+            PlayerPrefs.SetInt($"HighScore{i}", highscores[i]);
         }
         PlayerPrefs.Save(); // Save changes
     }
